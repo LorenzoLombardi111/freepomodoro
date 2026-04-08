@@ -106,7 +106,9 @@
         .timer-ring-bg { fill: none; stroke: var(--surface); stroke-width: 6; }
         .timer-ring-progress { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.15s ease; }
         .timer-display { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .timer-time { font-family: var(--font-ui); font-size: 64px; font-weight: 700; letter-spacing: -2px; color: var(--text-primary); }
+        .timer-time { font-family: var(--font-ui); font-size: 64px; font-weight: 700; letter-spacing: -2px; color: var(--text-primary); cursor: pointer; transition: all 0.15s ease; }
+        .timer-time:hover:not(.editing):not(.running) { border-bottom: 2px dashed var(--text-muted); }
+        .timer-time-input { font-family: var(--font-ui); font-size: 64px; font-weight: 700; letter-spacing: -2px; color: var(--text-primary); background: transparent; border: none; border-bottom: 2px solid var(--accent); outline: none; text-align: center; width: 120px; }
         .timer-label { font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
 
         /* Controls */
@@ -177,6 +179,7 @@
         @media (max-width: 768px) {
             .timer-container { width: 240px; height: 240px; }
             .timer-time { font-size: 52px; }
+            .timer-time-input { font-size: 52px; width: 100px; }
             .stats-row { gap: 8px; }
             .stat-card { padding: 12px 16px; min-width: 100px; }
             .stat-card .stat-value { font-size: 20px; }
@@ -417,8 +420,11 @@
         return getComputedStyle(document.documentElement).getPropertyValue('--long-break-color').trim();
     }
 
+    let editing = false;
+
     function render() {
-        timerDisplay.textContent = formatTime(remainingSeconds);
+        if (!editing) timerDisplay.textContent = formatTime(remainingSeconds);
+        timerDisplay.classList.toggle('running', running);
         const fraction = 1 - (remainingSeconds / totalSeconds);
         progress.style.strokeDashoffset = CIRCUMFERENCE * (1 - fraction);
         progress.style.stroke = getColor();
@@ -530,12 +536,57 @@
 
     settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('open'));
 
-    // Settings inputs
+    // Settings inputs (declared early so timer edit can reference them)
     const setFocus = document.getElementById('setFocus');
     const setShort = document.getElementById('setShort');
     const setLong = document.getElementById('setLong');
     const setRounds = document.getElementById('setRounds');
 
+    // Click timer to edit
+    timerDisplay.addEventListener('click', () => {
+        if (running || editing) return;
+        editing = true;
+        timerDisplay.classList.add('editing');
+        const currentMin = Math.ceil(remainingSeconds / 60);
+        timerDisplay.innerHTML = `<input type="number" class="timer-time-input" id="timerInput" value="${currentMin}" min="1" max="90">`;
+        const input = document.getElementById('timerInput');
+        input.focus();
+        input.select();
+
+        const maxes = { focus: 90, short: 30, long: 60 };
+        const keys = { focus: 'focus', short: 'short', long: 'long' };
+
+        const commit = () => {
+            let val = parseInt(input.value);
+            if (isNaN(val) || val < 1) val = 1;
+            val = Math.min(val, maxes[mode]);
+            settings[keys[mode]] = val;
+            saveSettings();
+            totalSeconds = val * 60;
+            remainingSeconds = totalSeconds;
+            // Sync settings panel
+            const inputMap = { focus: setFocus, short: setShort, long: setLong };
+            if (inputMap[mode]) inputMap[mode].value = val;
+            editing = false;
+            timerDisplay.classList.remove('editing');
+            render();
+            showToast(`${mode === 'focus' ? 'Focus' : mode === 'short' ? 'Short break' : 'Long break'} set to ${val}m`);
+        };
+
+        const cancel = () => {
+            editing = false;
+            timerDisplay.classList.remove('editing');
+            render();
+        };
+
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter') { e.preventDefault(); commit(); }
+            if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+        });
+        input.addEventListener('blur', commit);
+    });
+
+    // Settings input values
     setFocus.value = settings.focus;
     setShort.value = settings.short;
     setLong.value = settings.long;
