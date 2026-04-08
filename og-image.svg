@@ -1,0 +1,9 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="630" fill="#faf9f6"/>
+    <circle cx="600" cy="260" r="80" fill="none" stroke="#C49A2A" stroke-width="6"/>
+    <line x1="600" y1="260" x2="600" y2="200" stroke="#C49A2A" stroke-width="5" stroke-linecap="round"/>
+    <line x1="600" y1="260" x2="640" y2="260" stroke="#C49A2A" stroke-width="4" stroke-linecap="round"/>
+    <text x="600" y="400" text-anchor="middle" font-family="sans-serif" font-size="42" font-weight="700" fill="#C49A2A">freepomodoro.app</text>
+    <text x="600" y="445" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#6b6760">Free Online Pomodoro Timer</text>
+    <text x="600" y="500" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#9e9b96">Free · Private · No Sign-Up · freesuite.app</text>
+</svg>
