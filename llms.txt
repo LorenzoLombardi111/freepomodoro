@@ -1,0 +1,30 @@
+# freepomodoro.app
+
+> Free online Pomodoro timer with customizable focus sessions, breaks, and productivity tracking.
+
+## What it does
+freepomodoro.app is a free, browser-based Pomodoro timer. Work in focused 25-minute sessions with short and long breaks. Features a visual progress ring, customizable durations, auto-start options, sound notifications, and daily session tracking. All data stays in your browser.
+
+## Key facts
+- 100% free, no sign-up required
+- Works offline (PWA)
+- Privacy-first: zero tracking, no cookies, no analytics
+- Customizable focus, short break, and long break durations
+- Visual progress ring with color-coded modes
+- Sound and browser notifications
+- Daily session and focus time tracking
+- Keyboard shortcuts: Space (play/pause), R (reset), S (skip)
+- Part of the Freesuite collection (freesuite.app)
+
+## Comparisons
+- vs Pomofocus: freepomodoro.app is ad-free with zero tracking, Pomofocus shows ads
+- vs Forest: freepomodoro.app is free and browser-based, Forest requires purchase and mobile app
+- vs TomatoTimer: freepomodoro.app has progress ring, stats tracking, and customizable auto-start
+
+## Related tools
+- freehabittracker.app — Habit Tracker
+- freenotepad.app — Notepad
+- freetypingtest.app — Typing Speed Test
+
+## URL
+https://freepomodoro.app/

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Pomodoro Timer for Students — freepomodoro.app</title>
+    <meta name="description" content="Use freepomodoro.app to study smarter with the Pomodoro Technique. Free, no sign-up, works offline. Built for students.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://freepomodoro.app/pomodoro-timer-for-students">
+    <meta name="theme-color" content="#faf9f6">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/favicon.png" type="image/png">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Pomodoro Timer for Students — freepomodoro.app">
+    <meta property="og:description" content="Use freepomodoro.app to study smarter with the Pomodoro Technique. Free, no sign-up, works offline. Built for students.">
+    <meta property="og:image" content="https://freepomodoro.app/og-image.svg">
+    <meta property="og:url" content="https://freepomodoro.app/pomodoro-timer-for-students">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Pomodoro Timer for Students — freepomodoro.app">
+    <meta name="twitter:description" content="Use freepomodoro.app to study smarter with the Pomodoro Technique. Free, no sign-up, works offline. Built for students.">
+    <meta name="twitter:image" content="https://freepomodoro.app/og-image.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD: Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Free Pomodoro Timer for Students — Study Smarter",
+        "description": "Use freepomodoro.app to study smarter with the Pomodoro Technique. Free, no sign-up, works offline. Built for students.",
+        "url": "https://freepomodoro.app/pomodoro-timer-for-students",
+        "publisher": {
+            "@type": "Organization",
+            "name": "freepomodoro.app",
+            "url": "https://freepomodoro.app/"
+        }
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is freepomodoro.app really free for students?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, freepomodoro.app is 100% free with no sign-up required. There are no premium tiers, no ads, and no hidden costs. It works entirely in your browser so your study data stays on your device." }
+            },
+            {
+                "@type": "Question",
+                "name": "How long are the study and break intervals?",
+                "acceptedAnswer": { "@type": "Answer", "text": "The classic Pomodoro Technique uses 25-minute study sessions followed by 5-minute breaks, with a longer 15-to-20-minute break after every four sessions. You can customize these intervals on freepomodoro.app to match your personal study rhythm." }
+            },
+            {
+                "@type": "Question",
+                "name": "Does freepomodoro.app work offline?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. freepomodoro.app is a Progressive Web App (PWA) that you can install on your phone, tablet, or laptop. Once loaded, it works without an internet connection — perfect for library study sessions or areas with poor Wi-Fi." }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I track how many Pomodoro sessions I complete?",
+                "acceptedAnswer": { "@type": "Answer", "text": "freepomodoro.app tracks your completed sessions locally in your browser. You can review your daily and weekly totals to monitor your study consistency over time, all without creating an account." }
+            },
+            {
+                "@type": "Question",
+                "name": "Does the Pomodoro Technique work for all subjects?",
+                "acceptedAnswer": { "@type": "Answer", "text": "The Pomodoro Technique is effective across subjects — from math problem sets and language practice to essay writing and science revision. The structured intervals help maintain focus regardless of the material." }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I use freepomodoro.app on my phone during study sessions?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. freepomodoro.app is fully responsive and works on any device with a browser. You can install it as a PWA on your home screen for quick access, and it will send you notifications when your study or break period ends." }
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://freepomodoro.app/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Free Pomodoro Timer for Students",
+                "item": "https://freepomodoro.app/pomodoro-timer-for-students"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #faf9f6;
+            --surface: #f4f2ee;
+            --border: #e8e4dd;
+            --text-primary: #1a1917;
+            --text-secondary: #6b6760;
+            --text-muted: #9e9b96;
+            --accent: #C49A2A;
+            --accent-hover: #A8831F;
+            --accent-text: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+            --font-body: 'Lora', serif;
+            --font-ui: 'DM Sans', sans-serif;
+        }
+        html.dark {
+            --bg: #141412;
+            --surface: #1e1c1a;
+            --border: #2e2b27;
+            --text-primary: #f0ede8;
+            --text-secondary: #9e9b96;
+            --text-muted: #6b6760;
+            --accent: #D4A835;
+            --accent-hover: #C49A2A;
+            --accent-text: #ffffff;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        html { font-size: 15px; line-height: 1.6; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-primary);
+        }
+
+        /* Header */
+        .header {
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-brand {
+            font-family: var(--font-ui);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .theme-toggle {
+            font-family: var(--font-ui);
+            font-size: 13px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.15s ease;
+        }
+        .theme-toggle:hover { background: var(--border); }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-family: var(--font-ui);
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 12px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .breadcrumb a { color: var(--accent); text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        /* Content */
+        .landing-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px 24px 64px;
+        }
+        .landing-content h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+        .landing-content h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+        .landing-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .cta-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 32px;
+            text-align: center;
+            margin: 32px 0;
+        }
+        .cta-box h3 {
+            font-family: var(--font-ui);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .cta-box p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .cta-btn {
+            font-family: var(--font-ui);
+            font-size: 15px;
+            font-weight: 600;
+            background: var(--accent);
+            color: var(--accent-text);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.15s ease;
+        }
+        .cta-btn:hover { background: var(--accent-hover); }
+
+        /* FAQ */
+        details {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 8px;
+        }
+        summary {
+            font-family: var(--font-ui);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        details p { margin-top: 12px; margin-bottom: 0; }
+
+        /* Cross-links */
+        .related-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+        .related-tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .related-tool-card:hover { box-shadow: var(--shadow); }
+        .related-tool-card .tool-name {
+            font-family: var(--font-ui);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .related-tool-card .tool-desc {
+            font-family: var(--font-ui);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Footer */
+        .landing-footer {
+            text-align: center;
+            padding: 32px 24px;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        /* Badge */
+        .suite-badge {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .landing-content h1 { font-size: 24px; }
+            .landing-content { padding: 24px 16px 48px; }
+            .related-tools { grid-template-columns: 1fr; }
+            .suite-badge .badge-prefix { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="/" class="header-brand">freepomodoro.app</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
+    </header>
+
+    <nav class="breadcrumb">
+        <a href="/">Home</a> › Free Pomodoro Timer for Students
+    </nav>
+
+    <article class="landing-content">
+        <h1>Free Pomodoro Timer for Students — Study Smarter</h1>
+
+        <p>Staying focused during long study sessions is one of the biggest challenges students face. The Pomodoro Technique — alternating 25-minute focused work blocks with short breaks — is a proven method that combats mental fatigue and keeps you productive. freepomodoro.app gives you a clean, distraction-free Pomodoro timer built specifically for students. It runs entirely in your browser, requires no sign-up, and works offline so you can study anywhere — in a lecture hall, a coffee shop, or a library with spotty Wi-Fi. Your session data stays on your device, and there is nothing to install unless you want the optional PWA for quick home-screen access.</p>
+
+        <h2>Why do students use the Pomodoro Technique?</h2>
+        <p>Students juggle multiple subjects, deadlines, and distractions daily. The Pomodoro Technique provides a simple structure: work for 25 minutes, take a 5-minute break, and repeat. This rhythm prevents burnout during marathon study sessions and gives your brain the recovery time it needs to consolidate information. Research shows that spaced, focused intervals outperform passive cramming for retention and recall. Whether you are writing an essay, solving problem sets, or reviewing flashcards, the technique adapts to any task. Students also report that having a visible countdown reduces procrastination — once the timer starts, the commitment to focus feels concrete rather than abstract.</p>
+
+        <h2>How can freepomodoro.app help with studying?</h2>
+        <p>freepomodoro.app strips away every barrier between you and focused study. There are no ads, no account walls, and no distracting features — just a timer that does exactly what you need. You can customize session lengths to match different tasks: shorter sprints for dense material like organic chemistry, longer sessions for creative writing. The app tracks your completed Pomodoros locally so you can see your daily and weekly progress without sharing data with a server. Notifications alert you when a session or break ends, so you can step away from the screen during rest periods without losing track of time. Because it works offline as a PWA, you can rely on it even during internet outages or in airplane mode during flights home.</p>
+
+        <h2>Is the Pomodoro Technique effective for exam preparation?</h2>
+        <p>Exam prep is where the Pomodoro Technique truly shines. Instead of sitting for hours with diminishing returns, students can structure revision into focused blocks — four Pomodoros per subject, for example — and cover more ground with better retention. The forced breaks encourage active recall: after each session, you can jot down what you remember before checking your notes. This interleaving of study and retrieval strengthens memory pathways far more than passive re-reading. Many students use freepomodoro.app alongside a notepad to log what they covered in each session, creating a revision journal that doubles as a progress tracker.</p>
+
+        <h2>Can I use freepomodoro.app during lectures?</h2>
+        <p>Yes, and many students do. While the classic 25-minute Pomodoro maps perfectly onto most lecture segments, you can adjust the timer to match your class schedule — set a 50-minute session for a full lecture or a 15-minute sprint for pre-lecture review. Running freepomodoro.app on your phone or laptop during class helps you stay engaged by creating a subtle accountability mechanism. When the timer is active, you are less likely to drift into social media or unrelated browsing. For back-to-back classes, the break timer reminds you to stand, stretch, and reset your attention before the next session begins.</p>
+
+        <!-- CTA -->
+        <div class="cta-box">
+            <h3>Ready to Focus?</h3>
+            <p>No sign-up, no ads, no data collection. Just a timer that helps you study.</p>
+            <a href="/" class="cta-btn">Start Studying Smarter — Free →</a>
+        </div>
+
+        <!-- FAQ -->
+        <h2>Frequently Asked Questions</h2>
+        <details>
+            <summary>Is freepomodoro.app really free for students?</summary>
+            <p>Yes, freepomodoro.app is 100% free with no sign-up required. There are no premium tiers, no ads, and no hidden costs. It works entirely in your browser so your study data stays on your device.</p>
+        </details>
+        <details>
+            <summary>How long are the study and break intervals?</summary>
+            <p>The classic Pomodoro Technique uses 25-minute study sessions followed by 5-minute breaks, with a longer 15-to-20-minute break after every four sessions. You can customize these intervals on freepomodoro.app to match your personal study rhythm.</p>
+        </details>
+        <details>
+            <summary>Does freepomodoro.app work offline?</summary>
+            <p>Yes. freepomodoro.app is a Progressive Web App (PWA) that you can install on your phone, tablet, or laptop. Once loaded, it works without an internet connection — perfect for library study sessions or areas with poor Wi-Fi.</p>
+        </details>
+        <details>
+            <summary>Can I track how many Pomodoro sessions I complete?</summary>
+            <p>freepomodoro.app tracks your completed sessions locally in your browser. You can review your daily and weekly totals to monitor your study consistency over time, all without creating an account.</p>
+        </details>
+        <details>
+            <summary>Does the Pomodoro Technique work for all subjects?</summary>
+            <p>The Pomodoro Technique is effective across subjects — from math problem sets and language practice to essay writing and science revision. The structured intervals help maintain focus regardless of the material.</p>
+        </details>
+        <details>
+            <summary>Can I use freepomodoro.app on my phone during study sessions?</summary>
+            <p>Absolutely. freepomodoro.app is fully responsive and works on any device with a browser. You can install it as a PWA on your home screen for quick access, and it will send you notifications when your study or break period ends.</p>
+        </details>
+
+        <!-- Related Tools -->
+        <h2>More Free Tools from Freesuite</h2>
+        <div class="related-tools">
+            <a href="https://freehabittracker.app" class="related-tool-card">
+                <div class="tool-name">freehabittracker.app</div>
+                <div class="tool-desc">Build consistent study habits with a free, private habit tracker.</div>
+            </a>
+            <a href="https://freenotepad.app" class="related-tool-card">
+                <div class="tool-name">freenotepad.app</div>
+                <div class="tool-desc">Jot down notes and session logs with a distraction-free notepad.</div>
+            </a>
+            <a href="https://freetypingtest.app" class="related-tool-card">
+                <div class="tool-name">freetypingtest.app</div>
+                <div class="tool-desc">Improve your typing speed for faster note-taking and essays.</div>
+            </a>
+        </div>
+    </article>
+
+    <footer class="landing-footer">
+        &copy; freepomodoro.app
+    </footer>
+
+    <a href="https://freesuite.app" class="suite-badge" target="_blank" rel="noopener">
+        <span class="badge-prefix">by </span>freesuite.app
+    </a>
+
+    <script>
+    (() => {
+        const toggle = document.getElementById('themeToggle');
+        const getTheme = () => localStorage.getItem('suite_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const apply = (t) => { document.documentElement.classList.toggle('dark', t === 'dark'); toggle.textContent = t === 'dark' ? '\u{1F319}' : '\u{2600}\u{FE0F}'; localStorage.setItem('suite_theme', t); };
+        apply(getTheme());
+        toggle.addEventListener('click', () => apply(document.documentElement.classList.contains('dark') ? 'light' : 'dark'));
+    })();
+    </script>
+</body>
+</html>

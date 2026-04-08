@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Pomodoro Timer Online — freepomodoro.app</title>
+    <meta name="description" content="Free Pomodoro timer with focus sessions, short and long breaks. No sign-up, no ads. Track your productivity privately in your browser.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://freepomodoro.app/">
+    <meta name="theme-color" content="#faf9f6">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <meta property="og:title" content="Free Pomodoro Timer Online — freepomodoro.app">
+    <meta property="og:description" content="Free Pomodoro timer with focus sessions, short and long breaks. No sign-up, no ads. Track your productivity privately in your browser.">
+    <meta property="og:image" content="https://freepomodoro.app/og-image.svg">
+    <meta property="og:url" content="https://freepomodoro.app/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Pomodoro Timer Online — freepomodoro.app">
+    <meta name="twitter:description" content="Free Pomodoro timer with focus sessions, short and long breaks. No sign-up, no ads. Track your productivity privately in your browser.">
+    <meta name="twitter:image" content="https://freepomodoro.app/og-image.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "freepomodoro.app",
+        "description": "Free Pomodoro timer with focus sessions, short and long breaks. Track your productivity privately in your browser.",
+        "url": "https://freepomodoro.app/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "Is freepomodoro.app completely free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. freepomodoro.app is 100% free with no sign-up, no ads, and no usage limits. All timer data stays in your browser." } },
+            { "@type": "Question", "name": "What is the Pomodoro Technique?", "acceptedAnswer": { "@type": "Answer", "text": "The Pomodoro Technique is a time management method where you work in focused 25-minute sessions separated by short 5-minute breaks. After four sessions, you take a longer 15-minute break." } },
+            { "@type": "Question", "name": "Can I customize the timer durations?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. You can adjust the focus duration, short break, and long break times to match your preferred work rhythm. Your settings are saved automatically." } },
+            { "@type": "Question", "name": "Does freepomodoro.app work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. freepomodoro.app is a progressive web app that works offline after your first visit. No internet connection needed to use the timer." } },
+            { "@type": "Question", "name": "Does the timer play a sound when a session ends?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A gentle notification sound plays when each session or break ends. You can also enable browser notifications to get alerts even when the tab is in the background." } },
+            { "@type": "Question", "name": "Is my data private when using freepomodoro.app?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. freepomodoro.app has zero tracking, no cookies, and no analytics. Everything runs locally in your browser. Your productivity data never leaves your device." } }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://freepomodoro.app/" }] }
+    </script>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #faf9f6; --surface: #f4f2ee; --border: #e8e4dd;
+            --text-primary: #1a1917; --text-secondary: #6b6760; --text-muted: #9e9b96;
+            --accent: #C49A2A; --accent-hover: #A8831F; --accent-text: #ffffff;
+            --destructive: #c0392b; --success: #27ae60;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+            --font-body: 'Lora', serif; --font-ui: 'DM Sans', sans-serif;
+            --focus-color: #C49A2A; --break-color: #27ae60; --long-break-color: #3498db;
+        }
+        html.dark {
+            --bg: #141412; --surface: #1e1c1a; --border: #2e2b27;
+            --text-primary: #f0ede8; --text-secondary: #9e9b96; --text-muted: #6b6760;
+            --accent: #D4A835; --accent-hover: #C49A2A; --accent-text: #ffffff;
+            --success: #2ecc71;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
+        }
+        html { font-size: 15px; line-height: 1.6; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); }
+        .app-container { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* Header */
+        .header { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-bottom: 1px solid var(--border); background: var(--bg); flex-shrink: 0; }
+        .header-brand { font-family: var(--font-ui); font-size: 15px; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+        .theme-toggle { font-family: var(--font-ui); font-size: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; cursor: pointer; color: var(--text-secondary); transition: all 0.15s ease; display: flex; align-items: center; gap: 6px; }
+        .theme-toggle:hover { background: var(--border); }
+        .btn { font-family: var(--font-ui); font-size: 13px; font-weight: 500; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 6px; }
+        .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text-secondary); }
+        .btn-secondary:hover { background: var(--surface); }
+
+        /* Main */
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; gap: 32px; overflow-y: auto; }
+
+        /* Mode Toggle */
+        .mode-toggle { display: flex; gap: 4px; background: var(--surface); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+        .mode-btn { font-family: var(--font-ui); font-size: 13px; font-weight: 500; padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; background: transparent; color: var(--text-secondary); transition: all 0.15s ease; }
+        .mode-btn.active { color: var(--accent-text); font-weight: 600; }
+        .mode-btn.active[data-mode="focus"] { background: var(--focus-color); }
+        .mode-btn.active[data-mode="short"] { background: var(--break-color); }
+        .mode-btn.active[data-mode="long"] { background: var(--long-break-color); }
+
+        /* Timer Ring */
+        .timer-container { position: relative; width: 280px; height: 280px; }
+        .timer-ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .timer-ring-bg { fill: none; stroke: var(--surface); stroke-width: 6; }
+        .timer-ring-progress { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease, stroke 0.15s ease; }
+        .timer-display { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .timer-time { font-family: var(--font-ui); font-size: 64px; font-weight: 700; letter-spacing: -2px; color: var(--text-primary); }
+        .timer-label { font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+        /* Controls */
+        .controls { display: flex; gap: 12px; align-items: center; }
+        .ctrl-btn { width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; font-size: 20px; }
+        .ctrl-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .ctrl-btn-play { width: 72px; height: 72px; font-size: 24px; }
+        .ctrl-btn-play[data-mode="focus"] { background: var(--focus-color); color: var(--accent-text); }
+        .ctrl-btn-play[data-mode="short"] { background: var(--break-color); color: #fff; }
+        .ctrl-btn-play[data-mode="long"] { background: var(--long-break-color); color: #fff; }
+        .ctrl-btn-play:hover { opacity: 0.9; transform: scale(1.04); }
+        .ctrl-btn-secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+        .ctrl-btn-secondary:hover { background: var(--border); }
+
+        /* Stats Row */
+        .stats-row { display: flex; gap: 16px; }
+        .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 24px; box-shadow: var(--shadow); text-align: center; min-width: 120px; }
+        .stat-card .stat-value { font-family: var(--font-ui); font-size: 24px; font-weight: 700; color: var(--text-primary); }
+        .stat-card .stat-label { font-family: var(--font-ui); font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
+        /* Settings Panel */
+        .settings-panel { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; width: 100%; max-width: 400px; box-shadow: var(--shadow); }
+        .settings-panel.open { display: block; }
+        .settings-title { font-family: var(--font-ui); font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+        .setting-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .setting-label { font-family: var(--font-ui); font-size: 13px; color: var(--text-secondary); }
+        .setting-input { width: 64px; padding: 6px 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-family: var(--font-ui); font-size: 13px; text-align: center; outline: none; transition: all 0.15s ease; }
+        .setting-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(196,154,42,0.12); }
+        .setting-toggle { position: relative; width: 40px; height: 22px; background: var(--border); border-radius: 11px; cursor: pointer; border: none; transition: all 0.15s ease; }
+        .setting-toggle.on { background: var(--accent); }
+        .setting-toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: all 0.15s ease; }
+        .setting-toggle.on::after { left: 20px; }
+
+        /* Upgrade */
+        .upgrade-prompt { border-top: 1px solid var(--border); padding: 16px 0 0; margin-top: 16px; }
+        .upgrade-prompt .upgrade-title { font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+        .upgrade-prompt .upgrade-desc { font-family: var(--font-ui); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .upgrade-prompt .upgrade-link { font-family: var(--font-ui); font-size: 12px; color: var(--accent); text-decoration: none; margin-top: 4px; display: inline-block; }
+
+        /* Status Bar */
+        .status-bar { height: 32px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: var(--surface); border-top: 1px solid var(--border); flex-shrink: 0; }
+        .status-bar span { font-family: var(--font-ui); font-size: 12px; color: var(--text-muted); }
+
+        /* Badge */
+        .suite-badge { position: fixed; bottom: 40px; right: 16px; font-family: var(--font-ui); font-size: 11px; font-weight: 400; color: var(--text-muted); text-decoration: none; z-index: 10; }
+
+        /* Toast */
+        .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text-primary); color: var(--bg); font-family: var(--font-ui); font-size: 13px; padding: 10px 20px; border-radius: 8px; opacity: 0; transition: all 0.15s ease; pointer-events: none; z-index: 1000; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+        /* SEO */
+        .seo-content { max-width: 720px; margin: 0 auto; padding: 64px 24px; font-family: var(--font-body); color: var(--text-primary); }
+        .seo-content h1 { font-size: 28px; font-weight: 700; margin-bottom: 24px; }
+        .seo-content h2 { font-size: 20px; font-weight: 600; margin-top: 32px; margin-bottom: 12px; }
+        .seo-content p { color: var(--text-secondary); margin-bottom: 16px; line-height: 1.7; }
+        .seo-content details { border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 8px; }
+        .seo-content summary { font-family: var(--font-ui); font-weight: 500; cursor: pointer; color: var(--text-primary); }
+        .seo-content details p { margin-top: 12px; margin-bottom: 0; }
+        .seo-footer { text-align: center; padding: 32px 24px; font-family: var(--font-ui); font-size: 12px; color: var(--text-muted); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .timer-container { width: 240px; height: 240px; }
+            .timer-time { font-size: 52px; }
+            .stats-row { gap: 8px; }
+            .stat-card { padding: 12px 16px; min-width: 100px; }
+            .stat-card .stat-value { font-size: 20px; }
+            .suite-badge .badge-prefix { display: none; }
+            .mode-btn { padding: 8px 14px; font-size: 12px; }
+            .settings-panel { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <a href="/" class="header-brand">freepomodoro.app</a>
+            <div class="header-actions">
+                <button class="btn btn-secondary" id="settingsBtn" aria-label="Settings">⚙ Settings</button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span class="toggle-icon">☀️</span></button>
+            </div>
+        </header>
+
+        <main class="main">
+            <!-- Mode Toggle -->
+            <div class="mode-toggle" id="modeToggle">
+                <button class="mode-btn active" data-mode="focus">Focus</button>
+                <button class="mode-btn" data-mode="short">Short Break</button>
+                <button class="mode-btn" data-mode="long">Long Break</button>
+            </div>
+
+            <!-- Timer -->
+            <div class="timer-container">
+                <svg class="timer-ring" viewBox="0 0 280 280">
+                    <circle class="timer-ring-bg" cx="140" cy="140" r="130"/>
+                    <circle class="timer-ring-progress" id="progress" cx="140" cy="140" r="130" stroke-dasharray="816.81" stroke-dashoffset="0"/>
+                </svg>
+                <div class="timer-display">
+                    <div class="timer-time" id="timerDisplay">25:00</div>
+                    <div class="timer-label" id="timerLabel">Focus</div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button class="ctrl-btn ctrl-btn-secondary" id="resetBtn" aria-label="Reset" title="Reset (R)">↺</button>
+                <button class="ctrl-btn ctrl-btn-play" id="playBtn" data-mode="focus" aria-label="Start" title="Start/Pause (Space)">▶</button>
+                <button class="ctrl-btn ctrl-btn-secondary" id="skipBtn" aria-label="Skip" title="Skip (S)">⏭</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-value" id="sessionsCount">0</div>
+                    <div class="stat-label">Sessions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="focusTime">0m</div>
+                    <div class="stat-label">Focus Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="streakCount">0</div>
+                    <div class="stat-label">Today's Streak</div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="settings-panel" id="settingsPanel">
+                <div class="settings-title">Timer Settings</div>
+                <div class="setting-row">
+                    <span class="setting-label">Focus (min)</span>
+                    <input type="number" class="setting-input" id="setFocus" min="1" max="90" value="25">
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Short Break (min)</span>
+                    <input type="number" class="setting-input" id="setShort" min="1" max="30" value="5">
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Long Break (min)</span>
+                    <input type="number" class="setting-input" id="setLong" min="1" max="60" value="15">
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Sessions before long break</span>
+                    <input type="number" class="setting-input" id="setRounds" min="2" max="10" value="4">
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Auto-start breaks</span>
+                    <button class="setting-toggle on" id="toggleAutoBreak" aria-label="Toggle auto-start breaks"></button>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Auto-start focus</span>
+                    <button class="setting-toggle" id="toggleAutoFocus" aria-label="Toggle auto-start focus"></button>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Sound</span>
+                    <button class="setting-toggle on" id="toggleSound" aria-label="Toggle sound"></button>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Browser notifications</span>
+                    <button class="setting-toggle" id="toggleNotif" aria-label="Toggle notifications"></button>
+                </div>
+                <div class="upgrade-prompt" id="upgrade-prompt">
+                    <div class="upgrade-title">🔒 Detailed Analytics & Cloud Sync</div>
+                    <div class="upgrade-desc">Track weekly trends, set goals, and sync across devices</div>
+                    <a href="https://freesuite.app" class="upgrade-link">Unlock with freesuite.app · $2.88/mo</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="status-bar">
+            <span id="statusLeft">Ready · 0 sessions today</span>
+            <span>All processing happens in your browser — nothing uploaded</span>
+        </footer>
+
+        <a href="https://freesuite.app" class="suite-badge" target="_blank" rel="noopener"><span class="badge-prefix">by </span>freesuite.app</a>
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-content">
+        <h1>Free Pomodoro Timer — Focus Better with Timed Work Sessions</h1>
+        <p>freepomodoro.app is a free online Pomodoro timer that helps you stay focused using timed work sessions and regular breaks. Based on the Pomodoro Technique, freepomodoro.app guides you through 25-minute focus sessions followed by 5-minute short breaks, with a longer 15-minute break after every four sessions. All timer durations are fully customizable, and your session history is tracked privately in your browser. freepomodoro.app requires no sign-up, shows no ads, and works entirely offline as a progressive web app. Whether you are studying, coding, writing, or working through tasks, freepomodoro.app keeps you on pace without distractions.</p>
+
+        <h2>How does the Pomodoro Technique work with freepomodoro.app?</h2>
+        <p>Select Focus mode and press the play button to start a 25-minute work session. When the timer ends, a sound plays and freepomodoro.app automatically transitions to a short break. After four focus sessions, you get a longer break. You can customize every duration in the settings panel. Your completed sessions and total focus time are tracked throughout the day.</p>
+
+        <h2>Is freepomodoro.app free to use?</h2>
+        <p>freepomodoro.app is completely free with no sign-up required. All timer logic runs locally in your browser. There are no ads, no tracking cookies, and no usage limits.</p>
+
+        <h2>What makes freepomodoro.app different from other Pomodoro timers?</h2>
+        <p>Unlike Pomofocus and other popular timers that display ads or require accounts, freepomodoro.app is clean and private. It features a visual progress ring, customizable durations, auto-start options, sound and browser notifications, and daily session tracking — all without any server communication.</p>
+
+        <h2>Can I use freepomodoro.app on my phone?</h2>
+        <p>Yes. freepomodoro.app is fully responsive and works on any device with a modern browser. You can install it as a progressive web app on your phone's home screen for an app-like experience.</p>
+
+        <h2>Is my data safe with freepomodoro.app?</h2>
+        <p>Absolutely. freepomodoro.app stores your settings and session data only in your browser's localStorage. There is zero tracking, no cookies, no analytics, and no server communication. Your productivity data never leaves your device.</p>
+
+        <h2>Frequently Asked Questions</h2>
+        <details><summary>Is freepomodoro.app completely free?</summary><p>Yes. freepomodoro.app is 100% free with no sign-up, no ads, and no usage limits. All timer data stays in your browser.</p></details>
+        <details><summary>What is the Pomodoro Technique?</summary><p>The Pomodoro Technique is a time management method where you work in focused 25-minute sessions separated by short 5-minute breaks. After four sessions, you take a longer 15-minute break.</p></details>
+        <details><summary>Can I customize the timer durations?</summary><p>Yes. You can adjust the focus duration, short break, and long break times to match your preferred work rhythm. Your settings are saved automatically.</p></details>
+        <details><summary>Does freepomodoro.app work offline?</summary><p>Yes. freepomodoro.app is a progressive web app that works offline after your first visit. No internet connection needed to use the timer.</p></details>
+        <details><summary>Does the timer play a sound when a session ends?</summary><p>Yes. A gentle notification sound plays when each session or break ends. You can also enable browser notifications to get alerts even when the tab is in the background.</p></details>
+        <details><summary>Is my data private when using freepomodoro.app?</summary><p>Absolutely. freepomodoro.app has zero tracking, no cookies, and no analytics. Everything runs locally in your browser. Your productivity data never leaves your device.</p></details>
+    </div>
+    <footer class="seo-footer">&copy; freepomodoro.app<div class="more-tools-placeholder"></div></footer>
+
+    <script>
+    /* ===== Dark Mode ===== */
+    (() => {
+        const toggle = document.getElementById('themeToggle');
+        const icon = toggle.querySelector('.toggle-icon');
+        const getTheme = () => localStorage.getItem('suite_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const applyTheme = (theme) => { document.documentElement.classList.toggle('dark', theme === 'dark'); icon.textContent = theme === 'dark' ? '🌙' : '☀️'; localStorage.setItem('suite_theme', theme); };
+        applyTheme(getTheme());
+        toggle.addEventListener('click', () => applyTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark'));
+    })();
+
+    /* ===== Toast ===== */
+    let toastTimer;
+    const showToast = (msg) => { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 3000); };
+
+    /* ===== Sound ===== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound() {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        o.type = 'sine'; o.frequency.value = 830;
+        g.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+        o.start(audioCtx.currentTime);
+        o.stop(audioCtx.currentTime + 0.8);
+        // Second beep
+        setTimeout(() => {
+            const o2 = audioCtx.createOscillator();
+            const g2 = audioCtx.createGain();
+            o2.connect(g2); g2.connect(audioCtx.destination);
+            o2.type = 'sine'; o2.frequency.value = 1000;
+            g2.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            g2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+            o2.start(audioCtx.currentTime);
+            o2.stop(audioCtx.currentTime + 0.6);
+        }, 300);
+    }
+
+    /* ===== State ===== */
+    const CIRCUMFERENCE = 2 * Math.PI * 130;
+    const defaults = { focus: 25, short: 5, long: 15, rounds: 4, autoBreak: true, autoFocus: false, sound: true, notif: false };
+
+    const loadSettings = () => {
+        try { return { ...defaults, ...JSON.parse(localStorage.getItem('pomo_settings') || '{}') }; }
+        catch { return { ...defaults }; }
+    };
+    const saveSettings = () => localStorage.setItem('pomo_settings', JSON.stringify(settings));
+
+    const loadStats = () => {
+        try {
+            const d = JSON.parse(localStorage.getItem('pomo_stats') || '{}');
+            const today = new Date().toDateString();
+            if (d.date !== today) return { date: today, sessions: 0, focusMin: 0 };
+            return d;
+        } catch { return { date: new Date().toDateString(), sessions: 0, focusMin: 0 }; }
+    };
+    const saveStats = () => { stats.date = new Date().toDateString(); localStorage.setItem('pomo_stats', JSON.stringify(stats)); };
+
+    let settings = loadSettings();
+    let stats = loadStats();
+    let mode = 'focus'; // focus, short, long
+    let totalSeconds = settings.focus * 60;
+    let remainingSeconds = totalSeconds;
+    let running = false;
+    let interval = null;
+    let sessionCount = 0;
+
+    /* ===== DOM ===== */
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerLabel = document.getElementById('timerLabel');
+    const progress = document.getElementById('progress');
+    const playBtn = document.getElementById('playBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const sessionsCount = document.getElementById('sessionsCount');
+    const focusTime = document.getElementById('focusTime');
+    const streakCount = document.getElementById('streakCount');
+    const statusLeft = document.getElementById('statusLeft');
+    const modeToggle = document.getElementById('modeToggle');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsPanel = document.getElementById('settingsPanel');
+
+    /* ===== Render ===== */
+    function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const sec = s % 60;
+        return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function getColor() {
+        if (mode === 'focus') return getComputedStyle(document.documentElement).getPropertyValue('--focus-color').trim();
+        if (mode === 'short') return getComputedStyle(document.documentElement).getPropertyValue('--break-color').trim();
+        return getComputedStyle(document.documentElement).getPropertyValue('--long-break-color').trim();
+    }
+
+    function render() {
+        timerDisplay.textContent = formatTime(remainingSeconds);
+        const fraction = 1 - (remainingSeconds / totalSeconds);
+        progress.style.strokeDashoffset = CIRCUMFERENCE * (1 - fraction);
+        progress.style.stroke = getColor();
+        playBtn.textContent = running ? '⏸' : '▶';
+        playBtn.dataset.mode = mode;
+        playBtn.setAttribute('aria-label', running ? 'Pause' : 'Start');
+
+        const labels = { focus: 'Focus', short: 'Short Break', long: 'Long Break' };
+        timerLabel.textContent = labels[mode];
+
+        // Mode toggle
+        modeToggle.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+
+        // Stats
+        sessionsCount.textContent = stats.sessions;
+        const mins = stats.focusMin;
+        focusTime.textContent = mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins}m`;
+        streakCount.textContent = sessionCount;
+
+        // Status bar
+        const stateLabel = running ? (mode === 'focus' ? 'Focusing' : 'On break') : 'Paused';
+        statusLeft.textContent = `${stateLabel} · ${stats.sessions} sessions today · ${stats.focusMin}m focused`;
+
+        // Title
+        document.title = `${formatTime(remainingSeconds)} — ${labels[mode]} | freepomodoro.app`;
+    }
+
+    /* ===== Timer Logic ===== */
+    function start() {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        running = true;
+        interval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds < 0) {
+                clearInterval(interval);
+                running = false;
+                onSessionEnd();
+                return;
+            }
+            render();
+        }, 1000);
+        render();
+    }
+
+    function pause() {
+        running = false;
+        clearInterval(interval);
+        render();
+    }
+
+    function reset() {
+        pause();
+        remainingSeconds = totalSeconds;
+        render();
+    }
+
+    function setMode(newMode) {
+        pause();
+        mode = newMode;
+        const durations = { focus: settings.focus, short: settings.short, long: settings.long };
+        totalSeconds = durations[mode] * 60;
+        remainingSeconds = totalSeconds;
+        render();
+    }
+
+    function onSessionEnd() {
+        if (settings.sound) playSound();
+        if (settings.notif && Notification.permission === 'granted') {
+            const labels = { focus: 'Focus session complete!', short: 'Break is over!', long: 'Long break is over!' };
+            new Notification('freepomodoro.app', { body: labels[mode], icon: '/favicon.svg' });
+        }
+
+        if (mode === 'focus') {
+            sessionCount++;
+            stats.sessions++;
+            stats.focusMin += settings.focus;
+            saveStats();
+            showToast(`Session ${sessionCount} complete!`);
+
+            if (sessionCount % settings.rounds === 0) {
+                setMode('long');
+                if (settings.autoBreak) start();
+            } else {
+                setMode('short');
+                if (settings.autoBreak) start();
+            }
+        } else {
+            showToast('Break is over — time to focus!');
+            setMode('focus');
+            if (settings.autoFocus) start();
+        }
+    }
+
+    function skip() {
+        pause();
+        onSessionEnd();
+    }
+
+    /* ===== Event Listeners ===== */
+    playBtn.addEventListener('click', () => running ? pause() : start());
+    resetBtn.addEventListener('click', reset);
+    skipBtn.addEventListener('click', skip);
+
+    modeToggle.addEventListener('click', e => {
+        const btn = e.target.closest('.mode-btn');
+        if (!btn) return;
+        setMode(btn.dataset.mode);
+    });
+
+    settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('open'));
+
+    // Settings inputs
+    const setFocus = document.getElementById('setFocus');
+    const setShort = document.getElementById('setShort');
+    const setLong = document.getElementById('setLong');
+    const setRounds = document.getElementById('setRounds');
+
+    setFocus.value = settings.focus;
+    setShort.value = settings.short;
+    setLong.value = settings.long;
+    setRounds.value = settings.rounds;
+
+    [setFocus, setShort, setLong, setRounds].forEach(input => {
+        input.addEventListener('change', () => {
+            settings.focus = Math.max(1, Math.min(90, parseInt(setFocus.value) || 25));
+            settings.short = Math.max(1, Math.min(30, parseInt(setShort.value) || 5));
+            settings.long = Math.max(1, Math.min(60, parseInt(setLong.value) || 15));
+            settings.rounds = Math.max(2, Math.min(10, parseInt(setRounds.value) || 4));
+            setFocus.value = settings.focus;
+            setShort.value = settings.short;
+            setLong.value = settings.long;
+            setRounds.value = settings.rounds;
+            saveSettings();
+            if (!running) setMode(mode);
+            showToast('Settings saved');
+        });
+    });
+
+    // Toggles
+    function setupToggle(id, key) {
+        const el = document.getElementById(id);
+        el.classList.toggle('on', settings[key]);
+        el.addEventListener('click', () => {
+            settings[key] = !settings[key];
+            el.classList.toggle('on', settings[key]);
+            saveSettings();
+            if (key === 'notif' && settings.notif && Notification.permission !== 'granted') {
+                Notification.requestPermission();
+            }
+        });
+    }
+    setupToggle('toggleAutoBreak', 'autoBreak');
+    setupToggle('toggleAutoFocus', 'autoFocus');
+    setupToggle('toggleSound', 'sound');
+    setupToggle('toggleNotif', 'notif');
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.code === 'Space') { e.preventDefault(); running ? pause() : start(); }
+        if (e.code === 'KeyR') reset();
+        if (e.code === 'KeyS') skip();
+    });
+
+    /* ===== Service Worker ===== */
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+
+    /* ===== Init ===== */
+    progress.style.strokeDasharray = CIRCUMFERENCE;
+    render();
+    </script>
+</body>
+</html>
