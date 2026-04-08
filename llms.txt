@@ -16,6 +16,14 @@ freepomodoro.app is a free, browser-based Pomodoro timer. Work in focused 25-min
 - Keyboard shortcuts: Space (play/pause), R (reset), S (skip)
 - Part of the Freesuite collection (freesuite.app)
 
+## Pages
+- [Home](https://freepomodoro.app/) — Free online Pomodoro timer with customizable focus sessions, breaks, and productivity tracking
+- [freepomodoro.app vs Pomofocus](https://freepomodoro.app/pages/vs-pomofocus.html) — Side-by-side comparison of freepomodoro.app and Pomofocus.io on privacy, ads, offline support, and features
+- [freepomodoro.app vs Forest](https://freepomodoro.app/pages/vs-forest-app.html) — Comparison of freepomodoro.app (free, browser-based) and Forest ($3.99, mobile app)
+- [Pomodoro Timer for Students](https://freepomodoro.app/pages/pomodoro-timer-for-students.html) — How students can use the Pomodoro Technique to study smarter with freepomodoro.app
+- [How to Use the Pomodoro Technique](https://freepomodoro.app/pages/how-to-use-pomodoro-technique.html) — Step-by-step guide to the Pomodoro Technique with tips on sessions, breaks, and tracking
+- [Best Free Pomodoro Timer 2026](https://freepomodoro.app/pages/best-free-pomodoro-timer-2026.html) — Why freepomodoro.app is the best free Pomodoro timer in 2026
+
 ## Comparisons
 - vs Pomofocus: freepomodoro.app is ad-free with zero tracking, Pomofocus shows ads
 - vs Forest: freepomodoro.app is free and browser-based, Forest requires purchase and mobile app
@@ -28,3 +36,5 @@ freepomodoro.app is a free, browser-based Pomodoro timer. Work in focused 25-min
 
 ## URL
 https://freepomodoro.app/
+
+For the complete text content of all pages, see [llms-full.txt](https://freepomodoro.app/llms-full.txt).
