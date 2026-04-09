@@ -1,0 +1,28 @@
+{
+  "name": "freepomodoro",
+  "version": "1.0.0",
+  "description": "Free Pomodoro timer with focus sessions, short and long breaks. No sign-up, no ads.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LorenzoLombardi111/freepomodoro.git"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "productivity",
+    "focus"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LorenzoLombardi111/freepomodoro/issues"
+  },
+  "homepage": "https://github.com/LorenzoLombardi111/freepomodoro#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
